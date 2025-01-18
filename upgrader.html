@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrader - Bobux Gambling Simulator</title>
+    <link rel="stylesheet" href="automaty.css" media="screen">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #2c2c2c;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+
+        h1 {
+            color: #ff8c00;
+            margin-bottom: 20px;
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid #ff8c00;
+            background-image: conic-gradient(#ff8c00 50%, #444 50%);
+            overflow: hidden;
+        }
+        .pointer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            width: 12px; 
+            height: 70px; 
+            background-color: rgba(0, 0, 0, 0.8); 
+            border-radius: 6px;
+            z-index: 10;
+            transition: transform 10s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 10px;
+            border: 2px solid #ff8c00;
+            border-radius: 5px;
+            margin-top: 10px;
+            background-color: #444;
+            color: #fff;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #ff8c00;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e07b00;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Upgrader</h1>
+
+<label for="stake">Ustal stawkę:</label>
+<input type="number" id="stake" value="100" min="1" />
+
+<div class="wheel-container">
+    <div class="pointer" id="pointer"></div>
+</div>
+
+<div class="result" id="result">Wynik: </div>
+<button id="spinButton" onclick="spinWheel()">Kręć!</button>
+
+<script>
+    let isFirstSpin = true;
+
+    function spinWheel() {
+        const pointer = document.getElementById('pointer');
+        const resultElement = document.getElementById('result');
+        const spinButton = document.getElementById('spinButton');
+        const stakeInput = document.getElementById('stake');
+
+        spinButton.disabled = true;
+
+        const stake = parseInt(stakeInput.value) || 0;
+
+        const randomDegrees = Math.floor(Math.random() * 360 + 720);
+
+        const spinDuration = isFirstSpin ? 6 : 12;
+        pointer.style.transition = `transform ${spinDuration}s cubic-bezier(0.25, 0.1, 0.25, 1)`;
+        pointer.style.transform = `rotate(${randomDegrees}deg)`;
+
+        setTimeout(() => {
+            const finalDegrees = randomDegrees % 360;
+            let bobuxChange = 0;
+
+            if (finalDegrees <= 180) {
+                bobuxChange = stake;
+                resultElement.textContent = `Wynik: Wygrałeś! Zdobyłeś ${stake} Bobux!`;
+            } else {
+                bobuxChange = -stake;
+                resultElement.textContent = `Wynik: Przegrałeś! Tracisz ${stake} Bobux!`;
+            }
+
+            updateBobuxWallet(bobuxChange);
+            
+            spinButton.disabled = false;
+            isFirstSpin = false;
+
+        }, spinDuration * 1000);
+    }
+
+    function updateBobuxWallet(amount) {
+        let currentBobux = parseInt(localStorage.getItem("bobuxWallet")) || 200;
+        currentBobux += amount;
+        localStorage.setItem("bobuxWallet", currentBobux);
+        alert(`Twoje nowe saldo Bobux: ${currentBobux}`);
+    }
+</script>
+
+</body>
+</html>

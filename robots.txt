@@ -1,0 +1,9 @@
+User-agent: *
+
+Allow: /
+Allow: /index.html
+Allow: /css/
+
+Disallow: /admin/
+
+Sitemap: https://freebobux.pl/sitemap.xml

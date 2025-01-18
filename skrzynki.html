@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bobux Gambling Simulejtor</title>
+    <style>
+        /* Globalne style */
+        body {
+            background-color: #1c1c1c;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header i nawigacja */
+        .header {
+            background-color: #333333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .header .counter {
+            font-size: 1.2em;
+            color: #ffa500;
+            margin-bottom: 10px;
+        }
+
+        .header .title a {
+            color: #ffa500;
+            font-size: 2em;
+            text-decoration: none;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #ffa500;
+            list-style-type: none;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .navbar li {
+            margin: 0 15px;
+        }
+
+        .navbar a {
+            color: #1c1c1c;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .navbar a:hover {
+            color: #333333;
+        }
+
+        /* Portfel */
+        .wallet {
+            text-align: center;
+            font-size: 1.2em;
+            color: #ffa500;
+            margin-top: 15px;
+        }
+
+        /* Styl kontenera na skrzynki */
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Styl skrzynek */
+        .loot-box {
+            background-color: #333333;
+            border: 2px solid #ffa500;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            width: 250px;
+        }
+
+        .loot-box:hover {
+            transform: scale(1.05);
+        }
+
+        .loot-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .loot-box h2 {
+            color: #ffa500;
+        }
+
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .open-button {
+            background-color: #ffa500;
+            color: #1c1c1c;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        .open-button:hover {
+            background-color: #ff8c00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="counter">
+        Liczba aktywnych hazardzistów: <span id="gamblerCount">10</span>
+    </div>
+    <h1 class="title">
+        <a href="bobuxy.html">Bobux Gambling Simulejtor</a>
+    </h1>
+</div>
+
+<ul class="navbar">
+    <li><a href="index.html">Strona Główna</a></li>
+    <li><a href="rules.html">Regulamin serwisu</a></li>
+    <li><a href="polityka-prywatnosci.html">Polityka Prywatności</a></li>
+    <li><a href="bobuxy.html">Generator Bobux</a></li>
+    <li><a href="automaty.html">Gambling Simulejtor</a></li>
+</ul>
+
+<div class="wallet">
+    Twój portfel Bobux: <span id="bobuxWallet">0</span> Bobux
+</div>
+
+<div class="container">
+    <!-- Skrzynka 1 -->
+    <div class="loot-box">
+        <img src="fred.jpg" alt="Skrzynka Freda">
+        <h2>Skrzynka Freda</h2>
+        <p class="price">Cena: 50 Bobux</p>
+        <button class="open-button" onclick="spendBobux(50)">Otwórz Skrzynkę</button>
+    </div>
+
+    <!-- Skrzynka 2 -->
+    <div class="loot-box">
+        <img src="sokrat.jpg" alt="Skrzynka Sokratesa">
+        <h2>Skrzynka Sokratesa</h2>
+        <p class="price">Cena: 150 Bobux</p>
+        <button class="open-button">Otwórz Skrzynkę</button>
+    </div>
+
+    <!-- Skrzynka 3 -->
+    <div class="loot-box">
+        <img src="chres.jpg" alt="Skrzynka Chreścijanisty">
+        <h2>Skrzynka Chrześcijanisty</h2>
+        <p class="price">Cena: 300 Bobux</p>
+        <button class="open-button">Otwórz Skrzynkę</button>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="index.css" />
+  <link rel="icon" type="image/png" href="bobux.png"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rules</title>
+</head>  
+<body>
+  <link rel="icon" type="image" href="bobuxn.webp" />
+    <div class="header"> 
+        <h1 class="title-r">Regulamin Strony</h1>
+        <button class="language-button uk-flag" onclick="changeLanguage()">Change language to English</button>
+        <div class="regulamin-text" id="regulamin-text">
+        </div>
+    </div>
+    <ul class="navbar">
+      <li><a href="index.html">Strona Główna</a></li>
+      <li><a href="rules.html">Regulamin serwisu</a></li>
+      <li><a href="polityka-prywatnosci.html">Polityka Prywatności</a></li>
+      <li><a href="bobuxy.html">Generator Bobux</a></li>
+    </ul>    
+    <script>
+      document.documentElement.lang = "pl";
+      function changeLanguage() {
+        var currentLanguage = document.documentElement.lang;
+        var newLanguage = currentLanguage === "en" ? "pl" : "en";
+        document.documentElement.lang = newLanguage;
+        var newRulesFile = newLanguage === "en" ? "rules_en.html" : "rules_pl.html";
+        fetch(newRulesFile)
+          .then(response => response.text())
+          .then(html => {
+            var regulaminElement = document.getElementById('regulamin-text');
+            regulaminElement.innerHTML = html;
+            var languageButton = document.querySelector('.language-button');
+            languageButton.textContent = newLanguage === "en" ? "Zmień język na Polski" : "Change language to English";
+            if (newLanguage === "en") {
+              languageButton.classList.remove('uk-flag');
+            } else {
+              languageButton.classList.add('uk-flag');
+            }
+          })
+          .catch(error => console.error('Error loading rules:', error));
+      }
+      window.onload = function() {
+        fetch("rules_pl.html")
+          .then(response => response.text())
+          .then(html => {
+            var regulaminElement = document.getElementById('regulamin-text');
+            regulaminElement.innerHTML = html;
+          })
+          .catch(error => console.error('Error loading default rules:', error));
+      };
+    </script>
+</body>
+</html>

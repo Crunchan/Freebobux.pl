@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symulator Gamblingu - Menu</title>
+    <link rel="stylesheet" href="automaty.css" media="screen">
+    <script src="bobux.js"></script> <!-- Import skryptu zarządzającego Bobuxami -->
+</head>
+<body>
+
+<div class="header">
+    <div class="counter">
+        Liczba aktywnych hazardzistów: <span id="gamblerCount">10</span>
+    </div>
+    <h1 class="title">
+        <a href="bobuxy.html" style="text-decoration: none; color: inherit;">
+            Bobux Gambling Simulejtor<br/>
+        </a>
+    </h1>
+</div>
+
+<ul class="navbar">
+    <li><a href="index.html">Strona Główna</a></li>
+    <li><a href="rules.html">Regulamin serwisu</a></li>
+    <li><a href="polityka-prywatnosci.html">Polityka Prywatności</a></li>
+    <li><a href="bobuxy.html">Generator Bobux</a></li>
+    <li><a href="automaty.html">Gambling Simulejtor</a></li>
+</ul>
+
+<div class="wallet">
+    Twój portfel Bobux: <span id="bobuxWallet">0</span> Bobux
+</div>
+
+<div class="container">
+    <div class="box" onclick="location.href='skrzynki.html'">
+        <img src="skrzynki.jpg" alt="Skrzynki">
+        <div class="box-title">Skrzynki</div>
+    </div>
+
+    <div class="box" onclick="location.href='upgrader.html'">
+        <img src="upgrader.jpg" alt="Upgrader">
+        <div class="box-title">Upgrader</div>
+    </div>
+
+    <div class="box" onclick="location.href='automat.html'">
+        <img src="automaty.jpg" alt="Automaty">
+        <div class="box-title">Automaty</div>
+    </div>
+</div>
+
+<script>
+    function updateGamblerCount() {
+        const gamblerCountElement = document.getElementById("gamblerCount");
+        let currentCount = parseInt(gamblerCountElement.textContent);
+        const randomChange = Math.random() < 0.5 ? -1 : 1;
+        currentCount = Math.max(1, currentCount + randomChange);
+        gamblerCountElement.textContent = currentCount;
+    }
+
+    setInterval(updateGamblerCount, 10000);
+</script>
+
+</body>
+</html>
